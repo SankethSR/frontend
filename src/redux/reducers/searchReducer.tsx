@@ -1,9 +1,14 @@
-const searchReducers = (state: any, action: { type: any; payload: any; }) => {
+const initState = {
+  name: "VICTIM_NAME"
+}
+
+const searchReducers = (state = initState, action: any) => {
   switch (action.type) {
-    case "rotate":
+    case "VICTIM_NAME":
       return {
-        rotating: action.payload
-      };
+            ...state, 
+            name: action.payload
+      }
     default:
       return state;
   }

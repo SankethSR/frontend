@@ -9,11 +9,11 @@ import {
     Flex, FlexItem, FlexModifiers, FlexBreakpoints
 } from '@patternfly/react-core';
 import "./search.css";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchAction } from "../../redux/actions/searchAction";
 
 const Search: React.FC = () => {
-
+    let isEmpty: Boolean = false;
     const [name, setName] = useState("");
 
     const handleNameChange = (value: string) => setName(value);
@@ -25,16 +25,21 @@ const Search: React.FC = () => {
     };*/
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-        getVictimName(name);
+        if (name == "") {
+            isEmpty = true;
+            // Prevent page reload
+            e.preventDefault();
+        } else {
+            getVictimName(name);
+            // Prevent page reload
+            e.preventDefault();
+        }
     }
 
-    const result : any = useSelector(state => state)
+    // const result: any =  useSelector((state) => state.searchReducers);
 
     const dispatch = useDispatch();
     const getVictimName = (name: String) => dispatch(searchAction(name));
-
-    
-
 
     return (
         <Form className="form-style" onSubmit={handleSubmit}>
@@ -47,7 +52,6 @@ const Search: React.FC = () => {
                             helperText="Please provide Victim's full name">
                             <TextInput
                                 type="search"
-                                style={{ maxWidth: "30em", marginRight: "1em", alignItems: "center" }}
                                 isRequired={true}
                                 value={name}
                                 aria-label="Search by Name"
@@ -57,9 +61,9 @@ const Search: React.FC = () => {
                     </FlexItem>
                     <FlexItem><ActionGroup className="action-group-style">
                         <Button variant="primary" type="submit" aria-label="search" isInline={true}>Search</Button>
-                        <Button variant="secondary">Clear</Button>
                     </ActionGroup></FlexItem>
-                </Flex></Flex>
+                </Flex>
+            </Flex>
         </Form>
     );
 }
