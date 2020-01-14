@@ -36,6 +36,7 @@ const Search: React.FC = () => {
 
     const dispatch = useDispatch();
     const getVictimName = (name: String) => dispatch(searchAction(name));
+    
 
     return (
         <Form className="form-style" onSubmit={handleSubmit}>

@@ -4,7 +4,6 @@ import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 import { useDispatch, useSelector } from "react-redux";
 
 import mapboxgl from "mapbox-gl";
-import { mapAction } from "../../redux/actions/mapAction";
 import marker from "../../icons/marker-red.png";
 
 // import marker from "./icons/marker-red.png";
@@ -12,14 +11,12 @@ import marker from "../../icons/marker-red.png";
 
 
 const Map: React.FC = () => {
-    debugger
     const storedState: any = useSelector((state) => state);
-    let props = storedState.SearchReducer.name.map.victims.list;
-    let longitude = props[0].map.lon;
-    let latitude = props[0].map.lat;
-
+    let props = storedState.SearchReducer.name;
+    let longitude = props.lon;
+    let latitude = props.lat;
     // const dispatch = useDispatch();
-    // dispatch(mapAction(latitude, longitude));
+    // dispatch(victimDetail(latitude, longitude));
 
     const mapPointLayer = (
         name: string,

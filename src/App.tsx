@@ -5,6 +5,7 @@ import Map from "./components/map/map";
 import Header from "./components/header/header";
 import Search from "./components/search/search"
 import VictimDetail from "./components/victim-details/victim-details";
+import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 import configureStore from "./redux/store";
 import { useSelector } from "react-redux";
 
@@ -14,17 +15,17 @@ const App: React.FC = () => {
     let noDataFound: Boolean = false;
     let initialDisplay: Boolean = true;
 
-    const storedState:any = useSelector((state) => state);
+    const storedState: any = useSelector((state) => state);
 
-    if(storedState.SearchReducer.name == "VICTIM_NAME"){
+    if (storedState.SearchReducer.name == "VICTIM_NAME") {
         console.log(storedState.name);
         initialDisplay = true;
-    }else if(storedState.SearchReducer.name.map.victims.list.length != 0){
-        noDataFound = true;
+    } else if (Object.keys(storedState.SearchReducer.name).length == 0) {
+        noDataFound = false;
         initialDisplay = false;
 
-    }else {
-        noDataFound = false;
+    } else {
+        noDataFound = true;
         initialDisplay = false;
     }
 
@@ -33,22 +34,28 @@ const App: React.FC = () => {
             <Header />
             <Search />
             {
-    !initialDisplay ? 
-                noDataFound ? 
-				<Flex className="search-bar-center">
-						<FlexItem>
-							<Map />
-						</FlexItem>
-						<FlexItem>
-							<VictimDetail />
-						</FlexItem>
-				</Flex> : 
-				<Flex>
-                        {/* Exxecute the below code if the data is empty / For NO DATA response */}
-                        <div>No Data. Please check Victim's name and try again!</div>
-                    </Flex>
-            : null 
-}
+                !initialDisplay ?
+                    noDataFound ?
+                        <Card isHoverable>
+                            <CardBody>
+                                <Flex className="search-bar-center">
+                                    <FlexItem>
+                                        <Map />
+                                    </FlexItem>
+                                    <FlexItem>
+                                        <VictimDetail />
+                                    </FlexItem>
+                                </Flex>
+                            </CardBody>
+                        </Card>
+
+                        :
+                        <Flex>
+                            {/* Exxecute the below code if the data is empty / For NO DATA response */}
+                            <div>No Data. Please check Victim's name and try again!</div>
+                        </Flex>
+                    : null
+            }
         </div>
     );
 };
