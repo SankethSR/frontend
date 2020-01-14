@@ -6,7 +6,10 @@ import {
     TextInput,
     ActionGroup,
     Button,
-    Flex, FlexItem, FlexModifiers, FlexBreakpoints
+    Flex, 
+    FlexItem, 
+    FlexModifiers, 
+    FlexBreakpoints
 } from '@patternfly/react-core';
 import "./search.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,14 +20,7 @@ const Search: React.FC = () => {
     const [name, setName] = useState("");
 
     const handleNameChange = (value: string) => setName(value);
-    /*const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-        debugger
-        searchAction(name)
-        // Prevent page reload
-        e.preventDefault();
-    };*/
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         if (name == "") {
             isEmpty = true;
             // Prevent page reload

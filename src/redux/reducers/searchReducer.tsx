@@ -4,9 +4,14 @@ const initState = {
 
 const searchReducers = (state = initState, action: any) => {
   switch (action.type) {
-    case "VICTIM_NAME":
+    case "SUCCESS":
       return {
             ...state, 
+            name: action.payload
+      }
+      case "HTTP_STATUS_RESPONSE_ERROR":
+      return {
+        ...state, 
             name: action.payload
       }
     default:
