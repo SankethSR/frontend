@@ -26,9 +26,6 @@ export function searchAction(name: String) {
         }
       })
       .then(async (response) => {
-        console.log(response);
-        //   setVictimList(response.map.victims.list);
-        //   setIsResponseOk(true);
         if(response.map.victims.list.length == 0){
           responseValue1 = {};
           responseValue2 = {};

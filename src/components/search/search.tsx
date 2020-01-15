@@ -8,8 +8,7 @@ import {
     Button,
     Flex, 
     FlexItem, 
-    FlexModifiers, 
-    FlexBreakpoints
+    FlexModifiers
 } from '@patternfly/react-core';
 import "./search.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +35,7 @@ const Search: React.FC = () => {
 
     const dispatch = useDispatch();
     const getVictimName = (name: String) => dispatch(searchAction(name));
-    
+
 
     return (
         <Form className="form-style" onSubmit={handleSubmit}>

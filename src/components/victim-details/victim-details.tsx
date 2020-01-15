@@ -17,7 +17,9 @@ import {
   Title
 } from '@patternfly/react-core';
 import configureStore from "../../redux/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { shelterAction } from "../../redux/actions/shelterAction";
+import ShelterDetail from "./shelter-details/shelter-details";
 
 
 const VictimDetail: React.FC = () => {
@@ -29,12 +31,11 @@ const VictimDetail: React.FC = () => {
     props = storedState.SearchReducer.name;
   }
 
-
   const logoProps = {
     href: "https://erdemo.io",
     target: "_blank"
   };
-  const status = {
+  let status = {
     assigned: "ASSIGNED",
     reported: "REPORTED",
     rescued: "RESCUED"
@@ -75,7 +76,9 @@ const VictimDetail: React.FC = () => {
                 <FlexItem>{String(props.medicalNeeded) ? "YES" : "NO"}</FlexItem>
                 <FlexItem>{props.features[0].place_name}</FlexItem>
                 <FlexItem>{props.features[1].place_name}</FlexItem>
-
+                {props.status !== status.reported ? (
+                  <ShelterDetail />
+                ) : null}
                 <FlexItem>
                   {new Date(props.timeStamp).toDateString()}
                 </FlexItem>

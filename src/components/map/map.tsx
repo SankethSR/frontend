@@ -75,7 +75,7 @@ const Map: React.FC = () => {
         <Card isHoverable>
             <CardHeader>Victim's Location</CardHeader>
             <CardBody>
-                <div id={"map"} style={{ width: "500px", height: "400px" }}></div>
+                <div id={"map"} style={{ width: "400px", height: "400px" }}></div>
             </CardBody>
         </Card>
     );
