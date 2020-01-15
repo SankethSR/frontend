@@ -22,11 +22,16 @@ const App: React.FC = () => {
     if (storedState.SearchReducer.name == "VICTIM_NAME") {
         initialDisplay = true;
     } else if (Object.keys(storedState.SearchReducer.name).length == 0) {
+        // No data display
         noDataFound = false;
         initialDisplay = false;
-    } else if (props.name != undefined) {
-        // This is to stop re-rendering Map Component once the shelter name is retrived from API.
-
+    } else if (props.name != undefined && props.status == "ASSIGNED") {
+        // To stop re-rendering Map Component once the shelter name is retrived from API.
+        showMap = true;
+        noDataFound = true;
+        initialDisplay = false;
+    } else if (props.status == "REPORTED") {
+        // To Show map for status REPORTED
         showMap = true;
         noDataFound = true;
         initialDisplay = false;
