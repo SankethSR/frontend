@@ -1,40 +1,28 @@
 import React from "react";
 import "@patternfly/react-core/dist/styles/base.css";
 import {
-  Page,
-  PageHeader,
   Card,
   CardHeader,
-  CardFooter,
   CardBody,
-  Alert,
-  PageSection,
   Split,
   SplitItem,
   Flex,
   FlexItem,
   FlexModifiers,
-  Title
 } from '@patternfly/react-core';
-import configureStore from "../../redux/store";
-import { useSelector, useDispatch } from "react-redux";
-import { shelterAction } from "../../redux/actions/shelterAction";
+import { useSelector } from "react-redux";
 import ShelterDetail from "./shelter-details/shelter-details";
 
 
 const VictimDetail: React.FC = () => {
   let props = [];
   const storedState: any = useSelector((state) => state);
-  if (Object.keys(storedState.SearchReducer.name).length == 0) {
+  if (Object.keys(storedState.SearchReducer.name).length === 0) {
     props = [];
   } else {
     props = storedState.SearchReducer.name;
   }
 
-  const logoProps = {
-    href: "https://erdemo.io",
-    target: "_blank"
-  };
   let status = {
     assigned: "ASSIGNED",
     reported: "REPORTED",
@@ -56,7 +44,7 @@ const VictimDetail: React.FC = () => {
                 <FlexItem>Phone:</FlexItem>
                 <FlexItem>Needs First Aid:</FlexItem>
                 <FlexItem>Location:</FlexItem>
-                {props.status == status.reported ||
+                {props.status === status.reported ||
                   props.status === status.assigned ? (
                     <FlexItem>Neighboring Location:</FlexItem>
                   ) : null}

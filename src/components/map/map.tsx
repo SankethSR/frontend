@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "@patternfly/react-core/dist/styles/base.css";
-import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
-import { useDispatch, useSelector } from "react-redux";
+import { Card, CardHeader, CardBody } from '@patternfly/react-core';
+import {  useSelector } from "react-redux";
 
 import mapboxgl from "mapbox-gl";
 import marker from "../../icons/marker-red.png";

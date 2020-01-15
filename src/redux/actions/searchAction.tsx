@@ -26,26 +26,30 @@ export function searchAction(name: String) {
         }
       })
       .then(async (response) => {
-        if(response.map.victims.list.length == 0){
+        if (response.map.victims.list.length === 0) {
           responseValue1 = {};
           responseValue2 = {};
-          responseValue = {...responseValue1, ...responseValue2};
+          responseValue = { ...responseValue1, ...responseValue2 };
           dispatch({ type: "SUCCESS", payload: responseValue });
-        }else{
+        } else {
           responseValue1 = response.map.victims.list[0].map;
           const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
           }
           let token = "pk.eyJ1IjoibWVnaGFuYXNrYW5hZ2FsIiwiYSI6ImNrMXExdmU5ZjEyYWczY3FvZmw2dm9oamwifQ.qDuxo-hNK1XTwOGDRsvSTA";
-          let host = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + response.map.victims.list[0].map.lon + "," + response.map.victims.list[0].map.lat + ".json?" + "access_token=" + token;
-  
-          const res = await fetch(host, requestOptions);
+          let longitude = response.map.victims.list[0].map.lon;
+          let latitude = response.map.victims.list[0].map.lat;
+          let host = `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?`
+
+          const res = await fetch(host + new URLSearchParams({
+            access_token: token || ""
+          }), requestOptions);
           const responseValue2 = await res.json();
-  
-          responseValue = {...responseValue1, ...responseValue2};
+
+          responseValue = { ...responseValue1, ...responseValue2 };
           dispatch({ type: "SUCCESS", payload: responseValue });
-  
+
         }
       })
       .catch((error) => {
